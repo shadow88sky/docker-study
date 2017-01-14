@@ -48,5 +48,19 @@ docker run命令是docker的核心命令之一，用来基于特定的镜像创�
 ![docker命令结构图](./304V0F36G7.png)
 
 ## 搭建应用栈   
-Docker的设计理念是希望用户能够保证一个容器只运行一个进程，即只提供一种服务。然而，对于用户而言，单一容器是无法满足需求的。通常用户需要利用多个容器，分别提供不同的服务，并在不同容器互相通信，最后形成一个docker集群，以实现特定功能。
+Docker的设计理念是希望用户能够保证一个容器只运行一个进程，即只提供一种服务。然而，对于用户而言，单一容器是无法满足需求的。通常用户需要利用多个容器，分别提供不同的服务，并在不同容器互相通信，最后形成一个docker集群，以实现特定功能。下面我们会在一台机器上搭建简化版docker集群。
 ### redis集群
++ 拉取redis镜像
+```
+sudo docker pull redis
+```
++ 启动redis容器
+```
+sudo docker run -it --name redis-master
+sudo docker run -it --name redis-slave1 --link redis-master:master redis
+sudo docker run -it --name redis-slave2 --link redis-master:master redis
+```  
+    -i 表示交互模式  
+    -t 表示分配一个伪终端，一般两个参数结合时使用-it,即可在容器中利用打开的伪终端进行交互操作;  
+    --name 可以指定docker run命令启动容器的名字，若无次选项，Docker将为容器随机分配一个名字;  
+    -link 建立容器间的互联关系，使用格式为你name:alias(化名)。
