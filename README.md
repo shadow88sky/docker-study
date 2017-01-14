@@ -75,3 +75,25 @@ sudo docker run -it --name redis-slave2 --link redis-master:master redis /bin/ba
 sudo docker inspect --format "{{ .Volumes }}" containerID
 ```
 ![volumn](./volumn.png)
+
++ 进入挂载目录，创建redis.conf文件
+```
+cd xxx
+vim redis.conf
+
+daemonize yes
+pidfile /var/run/redis.pid
+port 7001
+bind 127.0.0.1
+databases 16
+appendonly yes
+appendfilename "appendonly.7000.aof"
+cluster-enabled yes
+cluster-config-file nodes-7001.conf
+cluster-node-timeout 15000
+cluster-slave-validity-factor 10
+cluster-migration-barrier 1
+cluster-require-full-coverage yes
+```
+
++ 进入docker容器中
