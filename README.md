@@ -76,24 +76,24 @@ sudo docker inspect --format "{{ .Volumes }}" containerID
 ```
 ![volumn](./volumn.png)
 
-+ 进入挂载目录，创建redis.conf文件
++ 进入master挂载目录，创建redis.conf文件
 ```
 cd xxx
 vim redis.conf
+```
+[master配置文件](https://github.com/shadow88sky/docker-study/blob/master/redis.master.conf)
 
-daemonize yes
-pidfile /var/run/redis.pid
-port 7001
-bind 127.0.0.1
-databases 16
-appendonly yes
-appendfilename "appendonly.7000.aof"
-cluster-enabled yes
-cluster-config-file nodes-7001.conf
-cluster-node-timeout 15000
-cluster-slave-validity-factor 10
-cluster-migration-barrier 1
-cluster-require-full-coverage yes
++ 进入master docker容器
+```
+docker attach containerID    //进入容器
+cd /data  //进入容器中的volume目录
+cp redis.conf /usr/local/bin   //copy conf文件
+cd /usr/local/bin  
+redis-server redis.conf   //启动redis
 ```
 
-+ 进入docker容器中
++ redis slave的配置同master基本一致，区别就是redis.conf多加一行
+```
+slaveof master 6379
+```
+[slaveof配置文件](https://github.com/shadow88sky/docker-study/blob/master/redis.slave.conf)
