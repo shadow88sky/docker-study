@@ -56,7 +56,7 @@ sudo docker pull redis
 ```
 + 启动redis容器
 ```
-sudo docker run -it --name redis-master
+sudo docker run -it --name redis-master redis
 sudo docker run -it --name redis-slave1 --link redis-master:master redis
 sudo docker run -it --name redis-slave2 --link redis-master:master redis
 ```  
