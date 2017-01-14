@@ -68,3 +68,4 @@ sudo docker run -it --name redis-slave2 --link redis-master:master redis
 ```
 sudo docker inspect --format "{{ .Volumes }}" containerID
 ```
+![volumn](./volumn.png)
