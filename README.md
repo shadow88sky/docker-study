@@ -56,9 +56,15 @@ sudo docker pull redis
 ```
 + 启动redis容器
 ```
-sudo docker run -it --name redis-master redis
-sudo docker run -it --name redis-slave1 --link redis-master:master redis
-sudo docker run -it --name redis-slave2 --link redis-master:master redis
+sudo docker run -it --name redis-master redis /bin/bash
+```  
+按组合键Ctrl+P+Q退出容器  
+```
+sudo docker run -it --name redis-slave1 --link redis-master:master redis /bin/bash
+```  
+按组合键Ctrl+P+Q退出容器
+```
+sudo docker run -it --name redis-slave2 --link redis-master:master redis /bin/bash
 ```  
     -i 表示交互模式  
     -t 表示分配一个伪终端，一般两个参数结合时使用-it,即可在容器中利用打开的伪终端进行交互操作;  
