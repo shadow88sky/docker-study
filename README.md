@@ -98,7 +98,9 @@ slaveof master 6379
 ```
 [slaveof配置文件](https://github.com/shadow88sky/docker-study/blob/master/redis.slave.conf)
 
-＋ 测试redis集群
+＋ 测试redis集群  
+master添加key  
 ![master](./master.png)
+slaveof获取value值  
 ![slaveof](./slaveof.png)
 
