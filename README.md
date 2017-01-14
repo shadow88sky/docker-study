@@ -63,4 +63,8 @@ sudo docker run -it --name redis-slave2 --link redis-master:master redis
     -i 表示交互模式  
     -t 表示分配一个伪终端，一般两个参数结合时使用-it,即可在容器中利用打开的伪终端进行交互操作;  
     --name 可以指定docker run命令启动容器的名字，若无次选项，Docker将为容器随机分配一个名字;  
-    -link 建立容器间的互联关系，使用格式为你name:alias(化名)。
+    -link 建立容器间的互联关系，使用格式为你name:alias(化名)。  
++ 查看挂载目录  
+```
+sudo docker inspect --format "{{ .Volumes }}" containerID
+```
