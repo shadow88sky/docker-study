@@ -3,7 +3,12 @@
 
         根据官方的定义，Docker是以Docker容器为资源分割和调度的基本单位，封装整个软件运行时环境，为开发者和系统管理员设计的，用于构建，发布和运行发布式应用的平台。
         它是一个跨平台，可移植并且简单易用的容器解决方案。Docker的源代码托管在GitHub上，基于Go语言开发并遵从Apache2.0协议。Docker可在容器内部快速自动化地部署应用，并通过
-        系统内核技术为容器提供资源隔离和安全保障。
+        系统内核技术为容器提供资源隔离和安全保障。  
+
+## 什么是docker镜像  
+
+        Docker镜像是一个只读的Docker容器模板，含有启动Docker容器所需的文件系统结构及其内容，因此是启动一个Docker容器的基础。可以这么理解,    
+        Dokcer镜像是Docker容器的静态视角，Docker容器是docker镜像的运行状态。
 
 ## docker基本命令
 + docker info & docker version 
@@ -110,5 +115,23 @@ slaveof master 6379
 ![master](./master.png)  
 
     slaveof获取value值  
-![slaveof](./slaveof.png)
+![slaveof](./slaveof.png)  
+
+## Dockerfile的使用  
+        docker build构建镜像时，其参数有三种类型(PATH,-,URL)，表示构建上下文的三种来源。  
+        一般情况下，将本地主机的一个包含Dockerfile的目录中的所有内容作为上下文。上下文通过docker build命令传入  
+        到Docker daemon后，便开始按照Dockerfile中的内容构造镜像。  
+
+### Dockerfile指令  
+
++ ENV  
+```
+格式: ENV<key><value>或ENV<key><value> ...
+```  
+
+        ENV指令可以为镜像创建出来的容器声明环境变量。并且在Dockerfile中，ENV指令声明的环境变量会被后面的特定指令(  
+        即ENV,ADD,COPY,WORKDIR,EXPOSE,VOLUME,USER)解释使用。其他指令使用环境变量时，使用格式为$variable_name  
+        或者${variable_name}。在变量前面添加斜杠\可以转义，如\$foo或者\${foo},将会被分别转换为$foo或者${foo},  
+        而不是环境变量所保存的值。另外，ONBUILD指令不支持环境变量。
+
 
