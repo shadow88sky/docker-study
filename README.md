@@ -1,4 +1,4 @@
-# docker-study
+# docker入门
 ## docker是什么  
 
         根据官方的定义，Docker是以Docker容器为资源分割和调度的基本单位，封装整个软件运行时环境，为开发者和系统管理员设计的，用于构建，发布和运行发布式应用的平台。
@@ -126,12 +126,46 @@ slaveof master 6379
 
 + ENV  
 ```
-格式: ENV<key><value>或ENV<key><value> ...
+        格式: ENV<key><value>或ENV<key><value> ...
 ```  
 
         ENV指令可以为镜像创建出来的容器声明环境变量。并且在Dockerfile中，ENV指令声明的环境变量会被后面的特定指令(  
         即ENV,ADD,COPY,WORKDIR,EXPOSE,VOLUME,USER)解释使用。其他指令使用环境变量时，使用格式为$variable_name  
         或者${variable_name}。在变量前面添加斜杠\可以转义，如\$foo或者\${foo},将会被分别转换为$foo或者${foo},  
-        而不是环境变量所保存的值。另外，ONBUILD指令不支持环境变量。
+        而不是环境变量所保存的值。另外，ONBUILD指令不支持环境变量。  
 
++ FROM  
+        格式:FROM<image>或FROM<image>:<tag>  
+
+        FROM指令的功能是为后面的指令提供基础镜像，因此一个有效的Dockerfile必须以FROM指令作为第一条非注释指令。从公共  
+        镜像库中拉取镜像很容易，基础镜像可以选择任何有效的镜像。在一个Dockerfile中，FROM指令可以出现多次，这样会构建多个  
+        镜像。在每个镜像创建完成后，Docker命令行界面会输出该镜像的id。若FROM指令中参数tag为空，则tag默认是latest;若  
+        参数image或tag指定的镜像不存在，则返回错误。  
+
++ COPY  
+        格式:COPY <src> <dest>  
+        COPY指令复制<src>所指向的文件或目录，将它添加到新的镜像中，复制的文件或目录在镜像中的路径是<dest>。  
+        若<dest>以反斜杠/结尾则其指向的是目录;否则指向文件。  
+
++ ADD  
+        格式:ADD <src> <dest>  
+        ADD和COPY类似，但还支持其他的功能。例如<src>可以指向一个网络文件的url或者一个本地压缩的归档文件。  
+
++ RUN  
+        有两种格式:  
+        RUN <command> (shell格式)  
+        RUN ["executable","param1","param2"] (excel格式，推荐格式)  
+        RUN指令会在前一条命令创建出的镜像的基础上创建一个容器，并在容器中运行命令，在命令结束运行后提交容器为  
+        新镜像，新镜像被Dockerfile中的下一条指令使用。  
+
++ CMD  
+        三种格式:  
+        CMD <command> (shell格式)  
+        CMD ["executable","param1","param2"] (excel格式，推荐格式)  
+        CMD ["param1","param2"] (为ENTRYPOINT指令提供参数)  
+        CMD指令提供容器运行时的默认值，这些默认值可以是一条指令，也可以是一些参数。一个Dockerfile中可以有多条  
+        CMD指令，但只有最后一条CMD指令有效。和RUN不同处在于，RUN指令在构建镜像时执行命令，并生成新的镜像;CMD  
+        在构建镜像时并不执行任何命令，而是在容器启动时默认将CMD指令作为第一条执行的命令。  
+
+### 通过Dockerfile构建Node镜像
 
