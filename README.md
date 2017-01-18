@@ -177,5 +177,20 @@ slaveof master 6379
 
 ### 通过Dockerfile构建Node镜像  
 在Node的根目录下面创建文件，名叫Dockerfile  
-![dockerfile](./dockerfile.png)
+![dockerfile](./dockerfile.png)  
+
+编辑dockerfile  
+        
+```        
+        FROM node:6
+
+        RUN mkdir -p /project
+        ADD . /project/
+        WORKDIR /project
+
+        ENV NODE_ENV development
+        EXPOSE 3003
+
+        CMD ["node", "app.js"]
+```
 
