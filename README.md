@@ -175,5 +175,7 @@ slaveof master 6379
         CMD指令，但只有最后一条CMD指令有效。和RUN不同处在于，RUN指令在构建镜像时执行命令，并生成新的镜像;CMD  
         在构建镜像时并不执行任何命令，而是在容器启动时默认将CMD指令作为第一条执行的命令。  
 
-### 通过Dockerfile构建Node镜像
+### 通过Dockerfile构建Node镜像  
+在Node的根目录下面创建文件，名叫Dockerfile  
+![dockerfile](./dockerfile.png)
 
