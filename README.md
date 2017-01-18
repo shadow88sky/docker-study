@@ -196,7 +196,11 @@ slaveof master 6379
 
 + 根目录创建镜像  
         docker build . -t test  
+![build](./build.png) 
 
-+ 启动镜像
-![build](./build.png)  
++ 启动镜像  
+        docker run -p 3003:3003 test  
+        -p 用于将容器的端口暴露给宿主机的端口，其常用格式为hostPort:containerPort。通过端口的暴露，  
+        可以让外部主机通过宿主机暴露的端口来访问容器内的应用。
+ 
 
