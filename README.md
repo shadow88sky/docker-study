@@ -135,6 +135,7 @@ slaveof master 6379
         而不是环境变量所保存的值。另外，ONBUILD指令不支持环境变量。  
 
 + FROM  
+
         格式:FROM<image>或FROM<image>:<tag>  
 
         FROM指令的功能是为后面的指令提供基础镜像，因此一个有效的Dockerfile必须以FROM指令作为第一条非注释指令。从公共  
@@ -143,15 +144,18 @@ slaveof master 6379
         参数image或tag指定的镜像不存在，则返回错误。  
 
 + COPY  
+
         格式:COPY <src> <dest>  
         COPY指令复制<src>所指向的文件或目录，将它添加到新的镜像中，复制的文件或目录在镜像中的路径是<dest>。  
         若<dest>以反斜杠/结尾则其指向的是目录;否则指向文件。  
 
 + ADD  
+
         格式:ADD <src> <dest>  
         ADD和COPY类似，但还支持其他的功能。例如<src>可以指向一个网络文件的url或者一个本地压缩的归档文件。  
 
 + RUN  
+
         有两种格式:  
         RUN <command> (shell格式)  
         RUN ["executable","param1","param2"] (excel格式，推荐格式)  
@@ -159,6 +163,7 @@ slaveof master 6379
         新镜像，新镜像被Dockerfile中的下一条指令使用。  
 
 + CMD  
+
         三种格式:  
         CMD <command> (shell格式)  
         CMD ["executable","param1","param2"] (excel格式，推荐格式)  
